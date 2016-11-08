@@ -17,8 +17,8 @@ class GroupPickerDialog extends Component {
     this.setNested = this.setNested.bind(this);
   }
 
-  shouldComponentUpdate(nextProps) {
-    return nextProps.groupPicker !== this.props.groupPicker;
+  shouldComponentUpdate(nextProps, nextState) {
+    return nextProps.groupPicker !== this.props.groupPicker || nextState.nestedGroups !== this.state.nestedGroups;
   }
 
   onConfirm() {
@@ -58,6 +58,7 @@ class GroupPickerDialog extends Component {
         </p>
         <LoadingPanel show={loading}>
           <GroupsTablePicker
+            nestedGroups={this.state.nestedGroups}
             canOpenGroup={false}
             groups={this.props.groupPicker.get('records')}
             excludedGroups={this.props.excludedGroups}

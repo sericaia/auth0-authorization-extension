@@ -6,7 +6,7 @@ import GroupRowPicker from './GroupRowPicker';
 
 class GroupsTablePicker extends Component {
   shouldComponentUpdate(nextProps) {
-    return nextProps.groups !== this.props.groups;
+    return nextProps.groups !== this.props.groups || nextProps.nestedGroups !== this.props.nestedGroups;
   }
 
   getRelevantGroups(all, selected) {
@@ -22,7 +22,7 @@ class GroupsTablePicker extends Component {
     return _.filter(all, group => !_.includes(selectedIds, group._id));
   }
 
-  selectAll(groups, selector, checked) {
+  selectAll = (groups, selector, checked) => {
     const selected = _.map(groups, group => ({ value: group._id, checked }));
     _.forEach(selected, target => selector({ target }));
   }
@@ -61,6 +61,7 @@ class GroupsTablePicker extends Component {
               <GroupRowPicker
                 key={index}
                 canOpenGroup={this.props.canOpenGroup}
+                checked={_.includes(Object.keys(this.props.nestedGroups), group._id)}
                 index={index}
                 group={group}
                 renderActions={this.props.renderActions}
@@ -80,7 +81,8 @@ GroupsTablePicker.propTypes = {
   canOpenGroup: React.PropTypes.bool,
   loading: React.PropTypes.bool.isRequired,
   renderActions: React.PropTypes.func,
-  setNested: React.PropTypes.func.isRequired
+  setNested: React.PropTypes.func.isRequired,
+  nestedGroups: React.PropTypes.object.isRequired
 };
 
 export default GroupsTablePicker;

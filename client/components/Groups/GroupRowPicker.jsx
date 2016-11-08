@@ -4,7 +4,7 @@ import { TableCell, TableRouteCell, TableTextCell, TableRow } from 'auth0-extens
 
 class GroupRowPicker extends Component {
   shouldComponentUpdate(nextProps) {
-    return nextProps.group !== this.props.group;
+    return nextProps.group !== this.props.group || nextProps.checked !== this.props.checked;
   }
 
   renderGroupName(group) {
@@ -21,7 +21,7 @@ class GroupRowPicker extends Component {
     return (
       <TableRow>
         <TableCell>
-          <input type="checkbox" name="nested-groups" value={group._id} onChange={this.props.setNested} />
+          <input type="checkbox" name="nested-groups" value={group._id} checked={this.props.checked} onChange={this.props.setNested} />
         </TableCell>
         {this.renderGroupName(group)}
         <TableTextCell>{ group.description || 'N/A' }</TableTextCell>
@@ -35,7 +35,8 @@ GroupRowPicker.propTypes = {
   index: React.PropTypes.number.isRequired,
   canOpenGroup: React.PropTypes.bool,
   group: React.PropTypes.object.isRequired,
-  setNested: React.PropTypes.func.isRequired
+  setNested: React.PropTypes.func.isRequired,
+  checked: React.PropTypes.bool
 };
 
 export default GroupRowPicker;
