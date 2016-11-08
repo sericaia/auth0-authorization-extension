@@ -22,6 +22,11 @@ class GroupsTablePicker extends Component {
     return _.filter(all, group => !_.includes(selectedIds, group._id));
   }
 
+  selectAll(groups, selector, checked) {
+    const selected = _.map(groups, group => ({ value: group._id, checked }));
+    _.forEach(selected, target => selector({ target }));
+  }
+
   render() {
     const { groups, excludedGroups } = this.props;
     const relevantGroups = this.getRelevantGroups(groups.toJS(), excludedGroups);
@@ -38,10 +43,15 @@ class GroupsTablePicker extends Component {
       <div style={{ maxHeight: '600px', overflowY: 'auto' }}>
         <Table>
           <TableHeader>
-            <TableColumn width="5%" onClick={() => {
-              console.log('Select all records');
-            }}>
-              <input type="checkbox" name="nested-groups" value="all" />
+            <TableColumn width="5%">
+              <input
+                type="checkbox"
+                name="nested-groups"
+                value="all"
+                onClick={() => {
+                  this.selectAll(relevantGroups, this.props.setNested, true);
+                }}
+              />
             </TableColumn>
             <TableColumn width="45%">Name</TableColumn>
             <TableColumn width="50%">Description</TableColumn>
