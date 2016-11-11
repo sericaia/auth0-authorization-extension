@@ -11,7 +11,7 @@ module.exports = `<!DOCTYPE html>
   <link rel="stylesheet" type="text/css" href="https://cdn.auth0.com/styleguide/4.8.10/index.min.css" />
   <link rel="stylesheet" type="text/css" href="https://cdn.auth0.com/manage/v0.3.1672/css/index.min.css">
   <% if (assets.style) { %><link rel="stylesheet" type="text/css" href="/app/<%= assets.style %>"><% } %>
-  <% if (assets.version) { %><link rel="stylesheet" type="text/css" href="//c29cd5d0.ngrok.io//extensions/auth0-authz/assets/auth0-authz.ui.<%= assets.version %>.css"><% } %>
+  <% if (assets.version) { %><link rel="stylesheet" type="text/css" href="//ecc45a43.ngrok.io//extensions/auth0-authz/assets/auth0-authz.ui.<%= assets.version %>.css"><% } %>
 </head>
 <body>
   <div id="app"></div>
@@ -21,8 +21,8 @@ module.exports = `<!DOCTYPE html>
   <% if (assets.vendors) { %><script type="text/javascript" src="<%= assets.vendors %>"></script><% } %>
   <% if (assets.app) { %><script type="text/javascript" src="<%= assets.app %>"></script><% } %>
   <% if (assets.version) { %>
-  <script type="text/javascript" src="//c29cd5d0.ngrok.io/extensions/auth0-authz/assets/auth0-authz.ui.vendors.<%= assets.version %>.js"></script>
-  <script type="text/javascript" src="//c29cd5d0.ngrok.io/extensions/auth0-authz/assets/auth0-authz.ui.<%= assets.version %>.js"></script>
+  <script type="text/javascript" src="//ecc45a43.ngrok.io/extensions/auth0-authz/assets/auth0-authz.ui.vendors.<%= assets.version %>.js"></script>
+  <script type="text/javascript" src="//ecc45a43.ngrok.io/extensions/auth0-authz/assets/auth0-authz.ui.<%= assets.version %>.js"></script>
   <% } %>
 </body>
 </html>`;
