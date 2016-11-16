@@ -7,8 +7,8 @@ import GroupMembersDialog from './GroupMembersDialog';
 import GroupsIcon from '../Icons/GroupsIcon';
 
 class GroupsOverview extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
 
     this.searchBarOptions = [
       {
@@ -19,7 +19,8 @@ class GroupsOverview extends React.Component {
     ];
 
     this.state = {
-      selectedFilter: this.searchBarOptions[0]
+      selectedFilter: this.searchBarOptions[0],
+      searchBarValue: props.searchBarValue
     };
 
     this.renderGroupActions = this.renderGroupActions.bind(this);
@@ -27,7 +28,6 @@ class GroupsOverview extends React.Component {
     // Searchbar.
     this.onKeyPress = this.onKeyPress.bind(this);
     this.onReset = this.onReset.bind(this);
-    this.onHandleOptionChange = this.onHandleOptionChange.bind(this);
     this.clear = this.clear.bind(this);
   }
 
@@ -35,6 +35,7 @@ class GroupsOverview extends React.Component {
     if (e.key === 'Enter') {
       e.preventDefault();
       this.props.onSearch(e.target.value, this.state.selectedFilter.filterBy);
+      this.props.saveSearchBarGroups(this.state.searchBarValue, this.state.selectedFilter.value);
     }
   }
 
@@ -46,9 +47,24 @@ class GroupsOverview extends React.Component {
     this.props.clear();
   }
 
-  onHandleOptionChange(option) {
+  onHandleOptionChange = (option) => {
     this.setState({
       selectedFilter: option
+    }, () => {
+      this.props.saveSearchBarGroups(this.state.searchBarValue, this.state.selectedFilter.value);
+    });
+  }
+
+  onHandleInputChange = (value) => {
+    this.setState({
+      searchBarValue: value
+    });
+  }
+
+  getSearchBarOptions(options, selectedValue) {
+    return _.map(options, (item) => {
+      item.selected = (item.value === selectedValue);
+      return item;
     });
   }
 
@@ -101,10 +117,12 @@ class GroupsOverview extends React.Component {
           <div className="col-xs-12">
             <SearchBar
               placeholder="Search for groups"
-              searchOptions={this.searchBarOptions}
+              searchValue={this.state.searchBarValue}
+              searchOptions={this.getSearchBarOptions(this.searchBarOptions, this.props.searchBarOptionValue)}
               handleKeyPress={this.onKeyPress}
               handleReset={this.onReset}
               handleOptionChange={this.onHandleOptionChange}
+              handleInputChange={this.onHandleInputChange}
             />
           </div>
         </div>
@@ -170,6 +188,9 @@ GroupsOverview.propTypes = {
   onSearch: React.PropTypes.func.isRequired,
   group: React.PropTypes.object.isRequired,
   groups: React.PropTypes.object.isRequired,
+  fetchQuery: React.PropTypes.string,
+  searchValue: React.PropTypes.string,
+  searchBarOptionValue: React.PropTypes.string,
   createGroup: PropTypes.func.isRequired,
   editGroup: PropTypes.func.isRequired,
   editGroupUsers: PropTypes.func.isRequired,
@@ -181,7 +202,8 @@ GroupsOverview.propTypes = {
   users: PropTypes.object.isRequired,
   addGroupMembers: PropTypes.func.isRequired,
   fetchUsers: PropTypes.func.isRequired,
-  resetFetchUsers: PropTypes.func.isRequired
+  resetFetchUsers: PropTypes.func.isRequired,
+  saveSearchBarGroups: PropTypes.func.isRequired
 };
 
 export default GroupsOverview;

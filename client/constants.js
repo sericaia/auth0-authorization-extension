@@ -306,12 +306,6 @@ export const FETCH_USERS_FULFILLED = 'FETCH_USERS_FULFILLED';
 // Reset Fetched Users.
 export const RESET_FETCH_USERS = 'RESET_FETCH_USERS';
 
-// Save searchbar users details.
-export const SAVE_SEARCHBAR_USERS = 'SAVE_SEARCHBAR_USERS';
-
-// Clean searchbar users details.
-export const CLEAN_SEARCHBAR_USERS = 'CLEAN_SEARCHBAR_USERS';
-
 // Fetch single.
 export const FETCH_USER = 'FETCH_USER';
 export const FETCH_USER_PENDING = 'FETCH_USER_PENDING';
@@ -449,3 +443,15 @@ export const DELETE_USER_ROLE = 'DELETE_USER_ROLE';
 export const DELETE_USER_ROLE_PENDING = 'DELETE_USER_ROLE_PENDING';
 export const DELETE_USER_ROLE_REJECTED = 'DELETE_USER_ROLE_REJECTED';
 export const DELETE_USER_ROLE_FULFILLED = 'DELETE_USER_ROLE_FULFILLED';
+
+/*
+ * Searchbar.
+ */
+
+ // Users.
+ export const SAVE_SEARCHBAR_USERS = 'SAVE_SEARCHBAR_USERS';
+ export const CLEAN_SEARCHBAR_USERS = 'CLEAN_SEARCHBAR_USERS';
+
+ // Groups.
+ export const SAVE_SEARCHBAR_GROUPS = 'SAVE_SEARCHBAR_GROUPS';
+ export const CLEAN_SEARCHBAR_GROUPS = 'CLEAN_SEARCHBAR_GROUPS';

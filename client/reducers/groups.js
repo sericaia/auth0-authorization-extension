@@ -9,7 +9,9 @@ const initialState = {
   error: null,
   records: [],
   total: 0,
-  fetchQuery: null
+  fetchQuery: null,
+  searchBarValue: null,
+  searchBarOptionValue: null
 };
 
 export const groups = createReducer(fromJS(initialState), {
@@ -53,5 +55,15 @@ export const groups = createReducer(fromJS(initialState), {
       loading: false,
       records: records.delete(index)
     });
-  }
+  },
+  [constants.SAVE_SEARCHBAR_GROUPS]: (state, action) =>
+    state.merge({
+      searchBarValue: action.meta.searchBarValue,
+      searchBarOptionValue: action.meta.searchBarOptionValue
+    }),
+  [constants.CLEAN_SEARCHBAR_GROUPS]: (state, action) =>
+    state.merge({
+      searchBarValue: null,
+      searchBarOptionValue: null
+    })
 });

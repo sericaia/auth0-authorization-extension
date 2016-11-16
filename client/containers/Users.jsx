@@ -7,7 +7,8 @@ import UserOverview from '../components/Users/UserOverview';
 
 class Users extends React.Component {
   static propTypes = {
-    fetchUsers: PropTypes.func.isRequired
+    fetchUsers: PropTypes.func.isRequired,
+    saveSearchBarUsers: PropTypes.func.isRequired
   }
   constructor() {
     super();

@@ -70,9 +70,12 @@ class GroupsContainer extends Component {
           groups={this.props.groups}
           users={this.props.users}
           fetchQuery={this.props.fetchQuery}
+          searchBarValue={this.props.searchBarValue}
+          searchBarOptionValue={this.props.searchBarOptionValue}
           addGroupMembers={this.props.addGroupMembers}
           fetchUsers={this.props.fetchUsers}
           resetFetchUsers={this.props.resetFetchUsers}
+          saveSearchBarGroups={this.props.saveSearchBarGroups}
         />
       </div>
     );
@@ -96,7 +99,8 @@ GroupsContainer.propTypes = {
   addGroupMembers: PropTypes.func.isRequired,
   fetchUsers: PropTypes.func.isRequired,
   resetFetchUsers: PropTypes.func.isRequired,
-  users: PropTypes.object.isRequired
+  users: PropTypes.object.isRequired,
+  saveSearchBarGroups: PropTypes.func.isRequired
 };
 
 function mapStateToProps(state) {
@@ -106,7 +110,9 @@ function mapStateToProps(state) {
       error: state.groups.get('error'),
       loading: state.groups.get('loading'),
       records: state.groups.get('records'),
-      fetchQuery: state.groups.get('fetchQuery')
+      fetchQuery: state.groups.get('fetchQuery'),
+      searchBarValue: state.groups.get('searchBarValue'),
+      searchBarOptionValue: state.groups.get('searchBarOptionValue')
     },
     users: state.users
   };

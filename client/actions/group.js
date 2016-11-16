@@ -289,3 +289,19 @@ export function deleteGroupRole(group, role, onSuccess) {
     }
   };
 }
+
+export function cleanSearchBarGroups() {
+ return {
+   type: constants.CLEAN_SEARCHBAR_GROUPS
+ }
+}
+
+export function saveSearchBarGroups(searchBarValue, searchBarOptionValue) {
+  return {
+   type: constants.SAVE_SEARCHBAR_GROUPS,
+   meta: {
+     searchBarValue,
+     searchBarOptionValue
+   }
+ };
+}
