@@ -308,6 +308,9 @@ export const RESET_FETCH_USERS = 'RESET_FETCH_USERS';
 // Save searchbar users details.
 export const SAVE_SEARCHBAR_USER_DETAILS = 'SAVE_SEARCHBAR_USER_DETAILS';
 
+// Clean searchbar users details.
+export const CLEAN_SEARCHBAR_USER_DETAILS = 'CLEAN_SEARCHBAR_USER_DETAILS';
+
 // Fetch single.
 export const FETCH_USER = 'FETCH_USER';
 export const FETCH_USER_PENDING = 'FETCH_USER_PENDING';

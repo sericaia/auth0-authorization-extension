@@ -62,5 +62,12 @@ export const users = createReducer(fromJS(initialState), {
       searchBarValue: action.meta.searchBarValue,
       searchBarOptionValue: action.meta.searchBarOptionValue
     });
+  },
+  [constants.CLEAN_SEARCHBAR_USER_DETAILS]: (state, action) => {
+    debugger;
+    return state.merge({
+      searchBarValue: null,
+      searchBarOptionValue: null
+    });
   }
 });
