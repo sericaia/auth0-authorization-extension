@@ -45,7 +45,7 @@ class Users extends React.Component {
         <UserOverview
           onReset={this.onReset}
           onSearch={this.onSearch}
-          saveSearchBarDetails={this.props.saveSearchBarDetails}
+          saveSearchBarUsers={this.props.saveSearchBarUsers}
           error={error}
           users={users}
           total={total}

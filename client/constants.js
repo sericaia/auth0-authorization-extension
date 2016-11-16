@@ -305,11 +305,12 @@ export const FETCH_USERS_FULFILLED = 'FETCH_USERS_FULFILLED';
 
 // Reset Fetched Users.
 export const RESET_FETCH_USERS = 'RESET_FETCH_USERS';
+
 // Save searchbar users details.
-export const SAVE_SEARCHBAR_USER_DETAILS = 'SAVE_SEARCHBAR_USER_DETAILS';
+export const SAVE_SEARCHBAR_USERS = 'SAVE_SEARCHBAR_USERS';
 
 // Clean searchbar users details.
-export const CLEAN_SEARCHBAR_USER_DETAILS = 'CLEAN_SEARCHBAR_USER_DETAILS';
+export const CLEAN_SEARCHBAR_USERS = 'CLEAN_SEARCHBAR_USERS';
 
 // Fetch single.
 export const FETCH_USER = 'FETCH_USER';

@@ -47,7 +47,7 @@ class UserOverview extends React.Component {
     if (e.key === 'Enter') {
       e.preventDefault();
       this.props.onSearch(`${e.target.value}*`, this.state.selectedFilter.filterBy);
-      this.props.saveSearchBarDetails(this.state.searchBarValue, this.state.selectedFilter.value);
+      this.props.saveSearchBarUsers(this.state.searchBarValue, this.state.selectedFilter.value);
     }
   }
 
@@ -59,7 +59,7 @@ class UserOverview extends React.Component {
     this.setState({
       selectedFilter: option
     }, () => {
-      this.props.saveSearchBarDetails(this.state.searchBarValue, this.state.selectedFilter.value);
+      this.props.saveSearchBarUsers(this.state.searchBarValue, this.state.selectedFilter.value);
     });
   }
 
@@ -162,7 +162,7 @@ UserOverview.propTypes = {
   loading: React.PropTypes.bool.isRequired,
   renderActions: React.PropTypes.func.isRequired,
   getUsersOnPage: React.PropTypes.func.isRequired,
-  saveSearchBarDetails: React.PropTypes.func.isRequired
+  saveSearchBarUsers: React.PropTypes.func.isRequired
 };
 
 export default UserOverview;

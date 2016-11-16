@@ -7,7 +7,9 @@ const initialState = {
   error: null,
   records: [],
   total: 0,
-  fetchQuery: null
+  fetchQuery: null,
+  searchBarValue: null,
+  searchBarOptionValue: null
 };
 
 describe('user reducer', () => {
@@ -33,7 +35,9 @@ describe('user reducer', () => {
         error: null,
         records: [],
         total: 0,
-        fetchQuery: null
+        fetchQuery: null,
+        searchBarValue: null,
+        searchBarOptionValue: null
       }
     );
   });
@@ -45,7 +49,9 @@ describe('user reducer', () => {
         error: null,
         records: [ 1, 2 ],
         total: 0,
-        fetchQuery: null
+        fetchQuery: null,
+        searchBarValue: null,
+        searchBarOptionValue: null
       }, {
         type: constants.FETCH_USERS_PENDING,
         meta: {
@@ -58,7 +64,9 @@ describe('user reducer', () => {
         error: null,
         records: [ 1, 2 ],
         total: 0,
-        fetchQuery: null
+        fetchQuery: null,
+        searchBarValue: null,
+        searchBarOptionValue: null
       }
     );
   });
@@ -75,7 +83,9 @@ describe('user reducer', () => {
         error: 'An error occured while loading the users: ERROR',
         records: [],
         total: 0,
-        fetchQuery: null
+        fetchQuery: null,
+        searchBarValue: null,
+        searchBarOptionValue: null
       }
     );
   });
@@ -101,7 +111,9 @@ describe('user reducer', () => {
         records: [],
         total: 100,
         nextPage: 2,
-        fetchQuery: null
+        fetchQuery: null,
+        searchBarValue: null,
+        searchBarOptionValue: null
       }
     );
   });
@@ -132,7 +144,9 @@ describe('user reducer', () => {
         records: [],
         total: 100,
         nextPage: 2,
-        fetchQuery: 'test'
+        fetchQuery: 'test',
+        searchBarValue: null,
+        searchBarOptionValue: null
       }
     );
   });
@@ -144,7 +158,9 @@ describe('user reducer', () => {
         error: null,
         records: [ 1, 2 ],
         total: 0,
-        fetchQuery: null
+        fetchQuery: null,
+        searchBarValue: null,
+        searchBarOptionValue: null
       }, {
         type: constants.RESET_FETCH_USERS,
       }).toJSON()
@@ -154,7 +170,9 @@ describe('user reducer', () => {
         error: null,
         records: [],
         total: 0,
-        fetchQuery: null
+        fetchQuery: null,
+        searchBarValue: null,
+        searchBarOptionValue: null
       }
     );
   });
@@ -171,7 +189,9 @@ describe('user reducer', () => {
           }
         ],
         total: 0,
-        fetchQuery: null
+        fetchQuery: null,
+        searchBarValue: null,
+        searchBarOptionValue: null
       }, {
         type: constants.BLOCK_USER_FULFILLED,
         meta: {
@@ -189,7 +209,9 @@ describe('user reducer', () => {
           }
         ],
         total: 0,
-        fetchQuery: null
+        fetchQuery: null,
+        searchBarValue: null,
+        searchBarOptionValue: null
       }
     );
   });
@@ -206,7 +228,9 @@ describe('user reducer', () => {
           }
         ],
         total: 0,
-        fetchQuery: null
+        fetchQuery: null,
+        searchBarValue: null,
+        searchBarOptionValue: null
       }, {
         type: constants.UNBLOCK_USER_FULFILLED,
         meta: {
@@ -224,7 +248,9 @@ describe('user reducer', () => {
           }
         ],
         total: 0,
-        fetchQuery: null
+        fetchQuery: null,
+        searchBarValue: null,
+        searchBarOptionValue: null
       }
     );
   });
@@ -242,7 +268,9 @@ describe('user reducer', () => {
           }
         ],
         total: 0,
-        fetchQuery: null
+        fetchQuery: null,
+        searchBarValue: null,
+        searchBarOptionValue: null
       }, {
         type: constants.REMOVE_MULTIFACTOR_FULFILLED,
         meta: {
@@ -261,7 +289,45 @@ describe('user reducer', () => {
           }
         ],
         total: 0,
-        fetchQuery: null
+        fetchQuery: null,
+        searchBarValue: null,
+        searchBarOptionValue: null
+      }
+    );
+  });
+
+  it('should handle SAVE_SEARCHBAR_USERS', () => {
+    expect(
+      users({
+        searchBarValue: null,
+        searchBarOptionValue: null
+      }, {
+        type: constants.SAVE_SEARCHBAR_USERS,
+        meta: {
+          searchBarValue: 'test',
+          searchBarOptionValue: 'email'
+        }
+      }).toJSON()
+    ).toEqual(
+      {
+        searchBarValue: 'test',
+        searchBarOptionValue: 'email'
+      }
+    );
+  });
+
+  it('should handle CLEAN_SEARCHBAR_USERS', () => {
+    expect(
+      users({
+        searchBarValue: 'test',
+        searchBarOptionValue: 'email'
+      }, {
+        type: constants.CLEAN_SEARCHBAR_USERS
+      }).toJSON()
+    ).toEqual(
+      {
+        searchBarValue: null,
+        searchBarOptionValue: null
       }
     );
   });

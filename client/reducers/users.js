@@ -56,18 +56,14 @@ export const users = createReducer(fromJS(initialState), {
         return multifactor.splice(0, 1);
       }
     ),
-  [constants.SAVE_SEARCHBAR_USER_DETAILS]: (state, action) => {
-    debugger;
-    return state.merge({
+  [constants.SAVE_SEARCHBAR_USERS]: (state, action) =>
+    state.merge({
       searchBarValue: action.meta.searchBarValue,
       searchBarOptionValue: action.meta.searchBarOptionValue
-    });
-  },
-  [constants.CLEAN_SEARCHBAR_USER_DETAILS]: (state, action) => {
-    debugger;
-    return state.merge({
+    }),
+  [constants.CLEAN_SEARCHBAR_USERS]: (state, action) =>
+    state.merge({
       searchBarValue: null,
       searchBarOptionValue: null
-    });
-  }
+    })
 });

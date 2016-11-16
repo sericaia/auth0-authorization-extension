@@ -33,9 +33,18 @@ export function fetchUsers(q = '', field = '', reset = false, per_page, page, on
 }
 
 export function resetFetchUsers() {
-  return {
-    type: constants.RESET_FETCH_USERS
+  return (dispatch) => {
+    dispatch({
+      type: constants.RESET_FETCH_USERS
+    });
+    dispatch(cleanSearchBarUsers());
   };
+}
+
+export function cleanSearchBarUsers() {
+  return {
+    type: constants.CLEAN_SEARCHBAR_USERS
+  }
 }
 
 /*
@@ -150,9 +159,9 @@ export function deleteUserRole(user, role, onSuccess) {
   };
 }
 
-export function saveSearchBarDetails(searchBarValue, searchBarOptionValue) {
+export function saveSearchBarUsers(searchBarValue, searchBarOptionValue) {
   return {
-    type: constants.SAVE_SEARCHBAR_USER_DETAILS,
+    type: constants.SAVE_SEARCHBAR_USERS,
     meta: {
       searchBarValue,
       searchBarOptionValue
