@@ -9,8 +9,8 @@ import UsersTable from './UsersTable';
 import UserIcon from '../Icons/UsersIcon';
 
 class UserOverview extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
 
     this.searchBarOptions = [
       {
@@ -31,7 +31,8 @@ class UserOverview extends React.Component {
     ];
 
     this.state = {
-      selectedFilter: this.searchBarOptions[0]
+      selectedFilter: this.searchBarOptions[0],
+      searchBarValue: props.searchBarValue
     };
 
     this.renderActions = this.renderActions.bind(this);
@@ -40,13 +41,13 @@ class UserOverview extends React.Component {
     // Searchbar.
     this.onKeyPress = this.onKeyPress.bind(this);
     this.onReset = this.onReset.bind(this);
-    this.onHandleOptionChange = this.onHandleOptionChange.bind(this);
   }
 
   onKeyPress(e) {
     if (e.key === 'Enter') {
       e.preventDefault();
       this.props.onSearch(`${e.target.value}*`, this.state.selectedFilter.filterBy);
+      this.props.saveSearchBarDetails(this.state.searchBarValue, this.state.selectedFilter.value);
     }
   }
 
@@ -54,14 +55,29 @@ class UserOverview extends React.Component {
     this.props.onReset();
   }
 
-  onHandleOptionChange(option) {
+  onHandleOptionChange = (option) => {
     this.setState({
       selectedFilter: option
+    }, () => {
+      this.props.saveSearchBarDetails(this.state.searchBarValue, this.state.selectedFilter.value);
+    });
+  }
+
+  onHandleInputChange = (value) => {
+    this.setState({
+      searchBarValue: value
     });
   }
 
   handleUsersPageChange(page) {
     this.props.getUsersOnPage(page);
+  }
+
+  getSearchBarOptions(options, selectedValue) {
+    return _.map(options, (item) => {
+      item.selected = (item.value === selectedValue);
+      return item;
+    });
   }
 
   renderActions(user, index) {
@@ -87,7 +103,7 @@ class UserOverview extends React.Component {
   }
 
   render() {
-    const { loading, error, users, total, fetchQuery, renderActions } = this.props;
+    const { loading, error, users, total, fetchQuery, searchBarValue, searchBarOptionValue, renderActions } = this.props;
 
     if (!error && !users.length && !loading && ((!fetchQuery || !fetchQuery.length) && !total)) { return this.renderEmptyState(); }
 
@@ -101,10 +117,12 @@ class UserOverview extends React.Component {
           <div className="col-xs-12">
             <SearchBar
               placeholder="Search for users"
-              searchOptions={this.searchBarOptions}
+              searchValue={this.state.searchBarValue}
+              searchOptions={this.getSearchBarOptions(this.searchBarOptions, searchBarOptionValue)}
               handleKeyPress={this.onKeyPress}
               handleReset={this.onReset}
               handleOptionChange={this.onHandleOptionChange}
+              handleInputChange={this.onHandleInputChange}
             />
           </div>
         </div>
@@ -138,10 +156,13 @@ UserOverview.propTypes = {
   onSearch: React.PropTypes.func.isRequired,
   error: React.PropTypes.object,
   users: React.PropTypes.array.isRequired,
-  total: React.PropTypes.number.isRequired,
+  fetchQuery: React.PropTypes.string,
+  searchValue: React.PropTypes.string,
+  searchBarOptionValue: React.PropTypes.string,
   loading: React.PropTypes.bool.isRequired,
   renderActions: React.PropTypes.func.isRequired,
-  getUsersOnPage: React.PropTypes.func.isRequired
+  getUsersOnPage: React.PropTypes.func.isRequired,
+  saveSearchBarDetails: React.PropTypes.func.isRequired
 };
 
 export default UserOverview;

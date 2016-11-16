@@ -38,17 +38,20 @@ class Users extends React.Component {
       return this.props.children;
     }
 
-    const { loading, error, users, total, fetchQuery } = this.props;
+    const { loading, error, users, total, fetchQuery, searchBarValue, searchBarOptionValue } = this.props;
 
     return (
       <div className="users-section">
         <UserOverview
           onReset={this.onReset}
           onSearch={this.onSearch}
+          saveSearchBarDetails={this.props.saveSearchBarDetails}
           error={error}
           users={users}
           total={total}
           fetchQuery={fetchQuery}
+          searchBarValue={searchBarValue}
+          searchBarOptionValue={searchBarOptionValue}
           loading={loading}
           getUsersOnPage={this.getUsersOnPage}
         />
@@ -64,6 +67,8 @@ function mapStateToProps(state) {
     users: state.users.get('records').toJS(),
     total: state.users.get('total'),
     fetchQuery: state.users.get('fetchQuery'),
+    searchBarValue: state.users.get('searchBarValue'),
+    searchBarOptionValue: state.users.get('searchBarOptionValue'),
     nextPage: state.users.get('nextPage')
   };
 }

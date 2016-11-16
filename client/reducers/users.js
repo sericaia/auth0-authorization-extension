@@ -9,7 +9,9 @@ const initialState = {
   error: null,
   records: [],
   total: 0,
-  fetchQuery: null
+  fetchQuery: null,
+  searchBarValue: null,
+  searchBarOptionValue: null
 };
 
 export const users = createReducer(fromJS(initialState), {
@@ -53,5 +55,12 @@ export const users = createReducer(fromJS(initialState), {
       [ 'records', state.get('records').findIndex(p => p.get('user_id') === action.meta.userId), 'multifactor' ], (multifactor) => {
         return multifactor.splice(0, 1);
       }
-    )
+    ),
+  [constants.SAVE_SEARCHBAR_USER_DETAILS]: (state, action) => {
+    debugger;
+    return state.merge({
+      searchBarValue: action.meta.searchBarValue,
+      searchBarOptionValue: action.meta.searchBarOptionValue
+    });
+  }
 });

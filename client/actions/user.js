@@ -149,3 +149,13 @@ export function deleteUserRole(user, role, onSuccess) {
     }
   };
 }
+
+export function saveSearchBarDetails(searchBarValue, searchBarOptionValue) {
+  return {
+    type: constants.SAVE_SEARCHBAR_USER_DETAILS,
+    meta: {
+      searchBarValue,
+      searchBarOptionValue
+    }
+  };
+}
